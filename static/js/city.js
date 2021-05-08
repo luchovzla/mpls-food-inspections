@@ -51,41 +51,24 @@ info.addTo(map);
 
 // Initialize an object containing icons for each layer group
 var icons = {
-  COMING_SOON: L.ExtraMarkers.icon({
-    icon: "ion-settings",
+  ROUTINE: L.ExtraMarkers.icon({
+    icon: "restaurant-outline",
     iconColor: "white",
     markerColor: "yellow",
     shape: "star"
   }),
-  EMPTY: L.ExtraMarkers.icon({
-    icon: "ion-android-bicycle",
+  FOLLOW_UP: L.ExtraMarkers.icon({
+    icon: "restaurant-outline",
     iconColor: "white",
     markerColor: "red",
     shape: "circle"
   }),
-  OUT_OF_ORDER: L.ExtraMarkers.icon({
-    icon: "ion-minus-circled",
-    iconColor: "white",
-    markerColor: "blue-dark",
-    shape: "penta"
-  }),
-  LOW: L.ExtraMarkers.icon({
-    icon: "ion-android-bicycle",
-    iconColor: "white",
-    markerColor: "orange",
-    shape: "circle"
-  }),
-  NORMAL: L.ExtraMarkers.icon({
-    icon: "ion-android-bicycle",
-    iconColor: "white",
-    markerColor: "green",
-    shape: "circle"
-  })
 };
 
 // Grabbin data with d3
 d3.json("/restaurants").then(function(data) {
 
+  // console.log(data);
   // Create an object to keep of the number of markers in each layer
   var inspectionCount = {
     ROUTINE: 0,
@@ -99,14 +82,14 @@ d3.json("/restaurants").then(function(data) {
   for (var i = 0; i < data.length; i++) {
 
   // Create a new station object with properties of both station objects
-  var inspection_type = Object.assign({}, data[i]);
+  // var inspection_type = Object.assign({}, data[i]);
   // If a station is listed but not installed, it's coming soon
-    if (!inspection_type.Routine) {
+    if (!inspection_type.routine) {
       inspecCode = "ROUTINE";
     }
-    // If a station has no bikes available, it's empty
+    // If a inspection_type is not routine, select follow-up
     else {
-      inspecCode = "FOLLOW-UP";
+      inspecCode = "FOLLOW_UP";_
     }
 
     // Update the restaurant count
@@ -122,16 +105,5 @@ d3.json("/restaurants").then(function(data) {
     // Bind a popup to the marker that will  display on click. This will be rendered as HTML
     newMarker.bindPopup(data.business_name + "<br> Inspection Type: " + data.inspection_type + "<br> Inspection Score: " + data.inspection_score);
   }
-  });
-
-// // Update the legend's innerHTML with the last updated time and station count
-// function updateLegend(time, stationCount) {
-//   document.querySelector(".legend").innerHTML = [
-//     "<p>Updated: " + moment.unix(time).format("h:mm:ss A") + "</p>",
-//     "<p class='out-of-order'>Out of Order Stations: " + stationCount.OUT_OF_ORDER + "</p>",
-//     "<p class='coming-soon'>Stations Coming Soon: " + stationCount.COMING_SOON + "</p>",
-//     "<p class='empty'>Empty Stations: " + stationCount.EMPTY + "</p>",
-//     "<p class='low'>Low Stations: " + stationCount.LOW + "</p>",
-//     "<p class='healthy'>Healthy Stations: " + stationCount.NORMAL + "</p>"
-//   ].join("");
+  }); 
    
