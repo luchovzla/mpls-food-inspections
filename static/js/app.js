@@ -29,6 +29,9 @@ function drawLineGraph(rest, address) {
         var lineData = [{
             x: inspDates,
             y: inspScores,
+            hovertemplate: '<b>Inspection Date:</b> %{x}' +
+            '<br><b>Inspection Score:</b> %{y}<br>' +
+            '<b>Inspection Type:</b> %{text}',
             text: inspTypes,
             type: 'line'
         }];
