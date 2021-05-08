@@ -24,3 +24,6 @@ hs_err_pid*
 
 # Config.py	
 config.py
+
+# Config.js (API keys)
+config.js

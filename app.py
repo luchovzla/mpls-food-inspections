@@ -43,7 +43,7 @@ def QueryFoodInspections():
     session = Session(engine)
     results = session.query(table.id, table.business_name, table.address, table.inspection_type, table.inspection_date, table.inspection_score, table.neighborhood, table.latitude, table.longitude).all()  
     session.close()  
-
+ 
     # Create a list of dictionaries, with each dictionary containing one row from the query. 
     all_restaurants = []
     for id, business_name, address, inspection_type, inspection_date, inspection_score, neighborhood, latitude, longitude in results:    
