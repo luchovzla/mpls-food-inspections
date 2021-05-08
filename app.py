@@ -62,7 +62,6 @@ def QueryFoodInspections():
     # Return the jsonified result. 
     return jsonify(all_restaurants)
 
-
 # This statement is required for Flask to do its job. 
 # Think of it as chocolate cake recipe. 
 if __name__ == '__main__':

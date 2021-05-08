@@ -6,13 +6,24 @@ console.log("app.js loaded successfully!")
 
 var dropdownMenu = d3.select("#selRestaurant");
 
+// Read JSON then process it
 d3.json("/restaurants").then(data => {
 
-    data.forEach(restName => {
-        console.log(`Restaurant Name: ${restName.business_name}`)
+    // Gather restaurant names with address from JSON
+    var restNameAddress = data.map(rest => `${rest.business_name}-${rest.address}`);
+
+    // Gather uniques using the ... method
+    var uniqueRests = [...new Set(restNameAddress)];
+    
+    // Sort data alphabetically
+    uniqueRests.sort();
+    console.log(uniqueRests);
+
+    // Push to dropdown
+    uniqueRests.forEach(rest => {
         dropdownMenu.append("option")
-            .text(restName.business_name)
-            .property("value", restName.business_name)
+            .text(rest)
+            .property("value", rest);
     });
 
 });
