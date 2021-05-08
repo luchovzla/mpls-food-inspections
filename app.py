@@ -10,6 +10,8 @@ from sqlalchemy.ext.automap import automap_base
 from sqlalchemy.orm import Session
 from sqlalchemy import create_engine
 
+connection_string = f'postgresql://{user}:{password}@{host}:{port}/{database}'
+
 # Connect to the database
 engine = create_engine(connection_string)
 base = automap_base()
@@ -31,6 +33,35 @@ def IndexRoute():
 
     webpage = render_template("index.html")
     return webpage
+
+@app.route("/restaurants")
+def QueryFoodInspections():
+
+    ''' Query the database for food inspections and return the results as a JSON. '''
+
+    # Open a session, run the query, and then close the session again
+    session = Session(engine)
+    results = session.query(table.id, table.business_name, table.address, table.inspection_type, table.inspection_date, table.inspection_score, table.neighborhood, table.latitude, table.longitude).all()  
+    session.close()  
+
+    # Create a list of dictionaries, with each dictionary containing one row from the query. 
+    all_restaurants = []
+    for id, business_name, address, inspection_type, inspection_date, inspection_score, neighborhood, latitude, longitude in results:    
+        dict = {}
+        dict["id"] = id
+        dict["business_name"] = business_name
+        dict["address"] = address
+        dict["inspection_type"] = inspection_type
+        dict["inspection_date"] = inspection_date
+        dict["inspection_score"] = inspection_score
+        dict["neighborhood"] = neighborhood
+        dict["latitude"] = latitude
+        dict["longitude"] = longitude
+        all_restaurants.append(dict)
+
+    # Return the jsonified result. 
+    return jsonify(all_restaurants)
+
 
 # This statement is required for Flask to do its job. 
 # Think of it as chocolate cake recipe. 
