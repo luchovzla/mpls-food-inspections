@@ -28,6 +28,8 @@ d3.json("/restaurants").then(function(response) {
 
     // Set the data location property to a variable
     var location = (response[i].latitude, response[i].longitude);
+    var today = new Date();
+    var year = today.getFullYear(response[i].inspection_date);
 
     // Check for location property
     if (location) {
@@ -35,7 +37,7 @@ d3.json("/restaurants").then(function(response) {
       console.log(response[i].latitude, response[i].longitude);
       // Add a new marker to the cluster group and bind a pop-up
       markers.addLayer(L.marker([response[i].latitude, response[i].longitude])
-        .bindPopup(response[i].neighborhood));
+        .bindPopup(response[i].business_name + "<br> Year: " + year + "<br> Inspection Type: " + response[i].inspection_type + "<br> Inspection Score: " + response[i].inspection_score));
     }
   }
 
