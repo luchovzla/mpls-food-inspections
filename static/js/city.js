@@ -68,7 +68,7 @@ var icons = {
 // Grabbin data with d3
 d3.json("/restaurants").then(function(data) {
 
-  // console.log(data);
+  console.log(data);
   // Create an object to keep of the number of markers in each layer
   var inspectionCount = {
     ROUTINE: 0,
@@ -82,9 +82,9 @@ d3.json("/restaurants").then(function(data) {
   for (var i = 0; i < data.length; i++) {
 
   // Create a new station object with properties of both station objects
-  // var inspection_type = Object.assign({}, data[i]);
+  var markerType = Object.assign({}, data[i]);
   // If a station is listed but not installed, it's coming soon
-    if (!inspection_type.routine) {
+    if (!markerType.routine) {
       inspecCode = "ROUTINE";
     }
     // If a inspection_type is not routine, select follow-up
@@ -95,7 +95,7 @@ d3.json("/restaurants").then(function(data) {
     // Update the restaurant count
     inspectionCount[inspecCode]++;
     // Create a new marker with the appropriate icon and coordinates
-    var newMarker = L.marker([data.latitude, data.longitude], {
+    var newMarker = L.marker([data[i].latitude, data[i].longitude], {
       icon: icons[inspecCode]
     });
 
