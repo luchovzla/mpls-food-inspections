@@ -7,7 +7,14 @@ This demonstration shows how to integrate Flask with your HTML and JavaScript co
 
 Please clone this repository to your desktop and then do the following:
 
+<<<<<<< Updated upstream
 1. Run the sql schemas before running a jupyter notebook 
+=======
+1. Run the sql schemas in the following order before running a jupyter notebook in order to correctly populate the database
+    1. ``create_db``
+    1. ``commment_on_db``
+    1. ``create_table``
+>>>>>>> Stashed changes
 1. Navigate to the folder that contains ``app.py`` and launch a GitBash (Windows) or Terminal (Mac).
 1. Type ``source activate PythonData`` and then hit ENTER.
 1. Type ``python app.py`` and then hit ENTER.Type ``python app.py`` and then hit ENTER.
