@@ -29,12 +29,14 @@
 <body>
 
   <div class="container">
+    
     <div class="row">
       <div class="col-md-12 jumbotron text-center">
         <h1>Food Inspections in Minneapolis</h1>
         <p>Use the interactive charts below to explore the dataset</p>
       </div>
     </div>
+    
     <div class="row">
       <div class="col-md-12">
         <div id="bar-graph">
@@ -42,29 +44,31 @@
         </div>
       </div>
     </div>
+
     <div class="row">
       <div class="col-md-12">
-        <div id="line-graph">
+        <div id="line-selection">
           <h5>Luis' line graph</h5>
+          <h5>Select a restaurant to observe its food inspection score history:</h5>
+          <select id='selRestaurant' onchange='restChanged(this.value)'></select>
         </div>
       </div>
     </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <div id="line-graph"></div>
+      </div>
+    </div>
+
     <div class="row">
       <div class="col-md-12">
         <div id="markers">
-          <h5>Terra's Choropleth</h5>
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-12">
-        <div id="cluster">
-          <h5>Joe's cluster map</h5>
         </div>
       </div>
     </div>
   </div>
-
+  
   <!-- D3 -->
   <script src="https://d3js.org/d3.v5.min.js"></script>
 
