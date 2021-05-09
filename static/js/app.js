@@ -10,34 +10,43 @@ function drawLineGraph(rest, address) {
 
         // Filter data to name and address of restaurant to plot
         var filteredData = data.filter(obj => obj.business_name === rest && obj.address === address);
+        filteredData.forEach(d => d.inspection_date = new Date(d.inspection_date));
         
         // Sort by date
 
         filteredData.sort(function (x, y) {
-            let a = new Date(x.inspection_date),
-                b = new Date(y.inspection_date);
-            return a - b;
+            return x.inspection_date - y.inspection_date;
         });
+        console.log(filteredData);
+
 
         // Extract inspection dates, scores and types
         
         var inspDates = filteredData.map(data => data.inspection_date);
         var inspScores = filteredData.map(data => data.inspection_score);
         var inspTypes = filteredData.map(data => data.inspection_type); 
-
+        
+        // Format date component
+        // const dateFormatter = new Intl.DateTimeFormat('en-US');
+        // formattedDates = inspDates.map(date => dateFormatter.format(date));
+        
+        var today = new Date();
         // Trace data for line
         var lineData = [{
             x: inspDates,
             y: inspScores,
-            hovertemplate: '<br><b>Inspection Score:</b> %{y}<br>' +
-            '<b>Inspection Type:</b> %{text}',
+            hovertemplate: '<b>Inspection Type:</b> %{text}',
             text: inspTypes,
             type: 'line'
         }];
 
         // Layout variables
         var lineLayout = {
-            title: `Food Inspection Scores for ${rest}`
+            title: `Food Inspection Scores for ${rest}`,
+            xaxis: {
+                tickformat: "%Y-%b-%d"
+            },
+            yaxis: {range: [50, 105]}
         };
 
         // Draw plot
