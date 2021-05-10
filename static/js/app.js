@@ -17,7 +17,7 @@ function drawLineGraph(rest, address) {
         filteredData.sort(function (x, y) {
             return x.inspection_date - y.inspection_date;
         });
-        console.log(filteredData);
+        //console.log(filteredData);
 
 
         // Extract inspection dates, scores and types

@@ -1,13 +1,17 @@
 # Import the functions we need from flask
+import decimal
 from flask import Flask
 from flask import render_template 
 from flask import jsonify
+from sqlalchemy import (Column, Date, Enum, ForeignKey, Integer, String, Table, func, select, true)
+from sqlalchemy.sql.schema import MetaData
+from sqlalchemy.sql.sqltypes import DECIMAL
 from config import (user, password, host, port, database)
 
 # Import the functions we need from SQL Alchemy
 import sqlalchemy
 from sqlalchemy.ext.automap import automap_base
-from sqlalchemy.orm import Session
+from sqlalchemy.orm import Session, column_property
 from sqlalchemy import create_engine
 
 connection_string = f'postgresql://{user}:{password}@{host}:{port}/{database}'
@@ -19,6 +23,7 @@ base.prepare(engine, reflect=True)
 
 # Choose the table we wish to use
 table = base.classes.food_inspections
+
 
 # Instantiate the Flask application. (Chocolate cake recipe.)
 # This statement is required for Flask to do its job. 
@@ -61,7 +66,29 @@ def QueryFoodInspections():
 
     # Return the jsonified result. 
     return jsonify(all_restaurants)
+    
+@app.route("/avgScoreByNeighborhood")
+def QueryAvgScoreByNeighborhood():
+    
+    ''' Query the database for food inspections and return the results as a JSON. '''    
+    # viewname = Table('ex1', MetaData, column_property('id', Integer, primary_key = true), autoload=True, autoload_with=engine)
+    # base.prepare()
+    # view_name = base.classes.routine_avg_score_by_neighborhood_top10_view
 
+    with engine.connect() as con:
+        results = con.execute('SELECT neighborhood, is_avg::varchar FROM routine_avg_score_by_neighborhood_top10_view')
+
+    # Create a list of dictionaries, with each dictionary containing one row from the query. 
+    all_routine_avg_score_by_neighborhood_top10_view = []
+    for neighborhood, is_avg in results:    
+        mydict = {}
+        mydict["neighborhood"] = neighborhood
+        mydict["is_avg"] = is_avg
+        all_routine_avg_score_by_neighborhood_top10_view.append(mydict)
+
+    # Return the jsonified result. 
+    return jsonify(all_routine_avg_score_by_neighborhood_top10_view)
+    
 # This statement is required for Flask to do its job. 
 # Think of it as chocolate cake recipe. 
 if __name__ == '__main__':
