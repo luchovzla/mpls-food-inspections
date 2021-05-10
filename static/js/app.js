@@ -42,7 +42,7 @@ function drawLineGraph(rest, address) {
 
         // Layout variables
         var lineLayout = {
-            title: `Food Inspection Scores for ${rest}`,
+            title: `<b>Food Inspection Scores for ${rest}</b>`,
             xaxis: {
                 tickformat: "%Y-%b-%d",
                 tick0: ".5"
