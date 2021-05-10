@@ -4,9 +4,18 @@ body {
 }
   
 /* set map, body, and html to 100% of the screen size */
-/* #line {
+
+.jumbotron {
+  color: #007bff;
+  background-size: cover;
+}
+.jumbotron h5 {
+  color: #25383C;
+}
+
+#line {
   vertical-align: bottom;
-} */
+} 
 
 #markers,
 body,
@@ -15,8 +24,11 @@ html {
   vertical-align: top;
 }
 
-.jumbotron {
-  color: #007bff;
-  background-size: cover;
-  /* background-position: center top; */
-}
+#line-graph,
+body,
+html {
+  height: 100%;
+  width: 100%;
+} 
+
+
