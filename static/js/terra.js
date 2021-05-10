@@ -39,7 +39,7 @@ d3.json("/restaurants").then(function(response) {
       
       // Add a new marker to the cluster group and bind a pop-up
       markers.addLayer(L.marker([response[i].latitude, response[i].longitude])
-        .bindPopup(response[i].business_name + "<br> Year: " + year + "<br> Inspection Type: " + response[i].inspection_type + "<br> Inspection Score: " + response[i].inspection_score));
+        .bindPopup("<strong>" + response[i].business_name + "</strong> <br> Address: " + response[i].address +"<br> Date: " + year + "<br> Inspection Type: " + response[i].inspection_type + "<br> Inspection Score: " + response[i].inspection_score));
     }
   }
 
