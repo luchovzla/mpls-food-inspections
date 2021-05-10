@@ -44,7 +44,8 @@ function drawLineGraph(rest, address) {
         var lineLayout = {
             title: `Food Inspection Scores for ${rest}`,
             xaxis: {
-                tickformat: "%Y-%b-%d"
+                tickformat: "%Y-%b-%d",
+                tick0: ".5"
             },
             yaxis: {range: [50, 105]}
         };
