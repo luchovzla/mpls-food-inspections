@@ -49,9 +49,22 @@ d3.json("/restaurants").then(function(response) {
   // Add event listener to listen for clicks on markers
   markers.on('click', function(e) {
     var popup = e.layer.getPopup();
-    var popupContent = popup.getContent();
-    
-    
+    var content = popup.getContent();
+
+    var textArray = content.split("<br>");
+    console.log(textArray);
+
+    // Strip Restaurant Name
+    var restName = textArray[0];
+    restName = jQuery(restName).text();
+    console.log(restName);
+
+    // Strip Restaurant Address
+    var restAddress = textArray[1].split("Address: ")[1];
+    console.log(restAddress);
+
+    // Call drawLineGraph
+    drawLineGraph(restName, restAddress);
   });
 
 });
