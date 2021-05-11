@@ -13,7 +13,7 @@ Please clone this repository to your desktop and then do the following:
     1. ``create_table``
 1. Navigate to the folder that contains ``app.py`` and launch a GitBash (Windows) or Terminal (Mac).
 1. Type ``source activate PythonData`` and then hit ENTER.
-1. Type ``python app.py`` and then hit ENTER.Type ``python app.py`` and then hit ENTER.
+1. Type ``python app.py`` and then hit ENTER.
 1. Observe that the Flask server starts and tells you which port it's running on. Don't close this window.
 1.  With the Flask server running, enter this address in your Chrome browser: http://127.0.0.1:55000/. You'll see that it loads the index page. 
 1.  If you navigate to the following address, you'll see that it returns another JSON, this time from a database query: http://127.0.0.1:55000/resturants. This is an example of an API endpoint. Please read the code in ``app.py`` to see how this all works
