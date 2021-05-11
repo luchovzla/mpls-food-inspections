@@ -67,16 +67,25 @@ def QueryFoodInspections():
     # Return the jsonified result. 
     return jsonify(all_restaurants)
     
-@app.route("/avgScoreByNeighborhood")
-def QueryAvgScoreByNeighborhood():
+@app.route("/avgScoreByNeighborhood/<option>")
+def QueryAvgScoreByNeighborhood(option):
     
     ''' Query the database for food inspections and return the results as a JSON. '''    
     # viewname = Table('ex1', MetaData, column_property('id', Integer, primary_key = true), autoload=True, autoload_with=engine)
     # base.prepare()
     # view_name = base.classes.routine_avg_score_by_neighborhood_top10_view
 
-    with engine.connect() as con:
-        results = con.execute('SELECT neighborhood, is_avg::varchar FROM routine_avg_score_by_neighborhood_top10_view')
+  
+    with engine.connect() as con: 
+        if option == 'top10routine':       
+            results = con.execute('SELECT neighborhood, is_avg::varchar FROM routine_avg_score_by_neighborhood_top10_view')
+        if option == 'top10followup':
+            results = con.execute('SELECT neighborhood, is_avg::varchar FROM followup_avg_score_by_neighborhood_top10_view')
+        if option == 'bottom10routine':
+            results = con.execute('SELECT neighborhood, is_avg::varchar FROM routine_avg_score_by_neighborhood_bottom10_view')
+        if option == 'bottom10followup':
+            results = con.execute('SELECT neighborhood, is_avg::varchar FROM followup_avg_score_by_neighborhood_bottom10_view')
+                
 
     # Create a list of dictionaries, with each dictionary containing one row from the query. 
     all_routine_avg_score_by_neighborhood_top10_view = []
