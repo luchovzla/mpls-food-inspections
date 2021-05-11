@@ -23,8 +23,7 @@ var myMap = L.map("markers", {
   
     // Create a new marker cluster group
     var markers = L.markerClusterGroup();
-    console.log(markers);
-  
+
     // Loop through data
     for (var i = 0; i < response.length; i++) {
   
@@ -54,16 +53,13 @@ var myMap = L.map("markers", {
       var content = popup.getContent();
   
       var textArray = content.split("<br>");
-      console.log(textArray);
   
       // Strip Restaurant Name
       var restName = textArray[0];
       restName = jQuery(restName).text();
-      console.log(restName);
   
       // Strip Restaurant Address
       var restAddress = textArray[1].split("Address: ")[1];
-      console.log(restAddress);
   
       // Call drawLineGraph
       drawLineGraph(restName, restAddress);
