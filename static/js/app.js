@@ -42,10 +42,11 @@ function drawLineGraph(rest, address) {
 
         // Layout variables
         var lineLayout = {
-            title: `<b>Food Inspection Scores for ${rest}</b>`,
+            title: `<b>Food Inspection Scores for<br>${rest}</b>`,
             xaxis: {
+                type: "date",
                 tickformat: "%Y-%b-%d",
-                tick0: ".5"
+                range: ["2017-10-01", "2021-05-01"]
             },
             yaxis: {range: [50, 105]}
         };
