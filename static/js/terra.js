@@ -46,4 +46,12 @@ d3.json("/restaurants").then(function(response) {
   // Add our marker cluster layer to the map
   myMap.addLayer(markers);
 
+  // Add event listener to listen for clicks on markers
+  markers.on('click', function(e) {
+    var popup = e.layer.getPopup();
+    var popupContent = popup.getContent();
+    
+    
+  });
+
 });
